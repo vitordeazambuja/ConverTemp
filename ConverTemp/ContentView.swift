@@ -8,14 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var inputNumber = 0.0
+    @State private var inputUnit = "Celsius"
+    @State private var outputUnit = "Celsius"
+    
+    let units = ["Celsius", "Fahrenheit", "Kelvin"]
+    
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack{
+            Form{
+                // Input
+                Section("Enter a number and a unit"){
+                    TextField("Input Number", value: $inputNumber, format: .number)
+                        .keyboardType(.decimalPad)
+                    Picker("Input Unit", selection: $inputUnit){
+                        ForEach(units, id: \.self){
+                            Text("\($0)")
+                        }
+                    }.pickerStyle(.segmented)
+                }
+                
+                // Output
+                Section{
+                }
+            }.navigationTitle("ConverTemp")
         }
-        .padding()
     }
 }
 
