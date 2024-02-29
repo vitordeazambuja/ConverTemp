@@ -31,7 +31,12 @@ struct ContentView: View {
                 }
                 
                 // Output
-                Section{
+                Section("Select the output unit"){
+                    Picker("Input Unit", selection: $outputUnit){
+                        ForEach(units, id: \.self){
+                            Text("\($0)")
+                        }
+                    }.pickerStyle(.segmented)
                 }
             }.navigationTitle("ConverTemp")
         }
